@@ -20,6 +20,8 @@ public class QuizActivity extends AppCompatActivity {
     TextView mTextView;
     @Bind(R.id.next_button)
     Button mNextButton;
+    @Bind(R.id.previous_button)
+    Button mPreviousButton;
 
     Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_oceans, true),
@@ -44,7 +46,7 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer(false);            }
+                checkAnswer(true);            }
         });
 
         mFalseButton.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,13 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nextQuestion();
+            }
+        });
+
+        mPreviousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                previousQuestion();
             }
         });
 
@@ -79,15 +88,20 @@ public class QuizActivity extends AppCompatActivity {
         updateQuestion();
     }
 
+    private void previousQuestion() {
+        mCurrentIndex = (mCurrentIndex - 1 + mQuestionBank.length) % mQuestionBank.length;
+        updateQuestion();
+    }
+
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].ismAnswerTrue();
 
         int messageResId = 0;
 
         if(userPressedTrue == answerIsTrue) {
-            messageResId = R.id.true_button;
+            messageResId = R.string.true_button;
         } else {
-            messageResId = R.id.false_button;
+            messageResId = R.string.false_button;
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
