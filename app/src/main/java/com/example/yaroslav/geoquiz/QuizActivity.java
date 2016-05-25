@@ -23,6 +23,8 @@ public class QuizActivity extends AppCompatActivity {
     @Bind(R.id.previous_button)
     Button mPreviousButton;
 
+    private static final String KEY_INDEX = "index";
+
     Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_oceans, true),
             new Question(R.string.question_mideast, false),
@@ -39,6 +41,9 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         ButterKnife.bind(this);
+        if(savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
 
         updateQuestion();
 
@@ -104,5 +109,11 @@ public class QuizActivity extends AppCompatActivity {
             messageResId = R.string.false_button;
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
     }
 }
