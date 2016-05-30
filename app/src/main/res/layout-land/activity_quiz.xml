@@ -28,7 +28,11 @@
             android:drawableRight="@drawable/arrow_right"
             android:drawablePadding="4dp"/>
 
+
     </LinearLayout>
+
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,6 +40,14 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
         >
+        <Button
+            android:id="@+id/cheat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:text="@string/cheat_button" />
+
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

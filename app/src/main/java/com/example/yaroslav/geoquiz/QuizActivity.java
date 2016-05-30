@@ -1,7 +1,9 @@
 package com.example.yaroslav.geoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +13,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class QuizActivity extends AppCompatActivity {
+
+    public static final String TAG = "QuizActivity";
 
     @Bind(R.id.true_button)
     Button mTrueButton;
@@ -22,6 +26,8 @@ public class QuizActivity extends AppCompatActivity {
     Button mNextButton;
     @Bind(R.id.previous_button)
     Button mPreviousButton;
+    @Bind(R.id.cheat_button)
+    Button mCheatButton;
 
     private static final String KEY_INDEX = "index";
 
@@ -79,6 +85,14 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nextQuestion();
+            }
+        });
+
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = CheatActivity.newIntent(getApplicationContext(), mQuestionBank[mCurrentIndex].ismAnswerTrue());
+                startActivity(i);
             }
         });
     }
